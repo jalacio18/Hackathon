@@ -1,0 +1,35 @@
+Prueba de Concepto: Robot Escapista de Laberintos
+1. Introducción
+Nuestro proyecto consiste en desarrollar un robot autónomo capaz de escapar de un laberinto utilizando únicamente sensores ultrasónicos y una máquina de estados finitos (FSM). El robot Pioneer P3DX deberá navegar por un laberinto desconocido, evitando colisiones y encontrando la salida mediante algoritmos de exploración inteligente.
+
+El sistema implementará una combinación de seguimiento de pared izquierda mejorado con detección de callejones sin salida y toma de decisiones para maximizar la probabilidad de encontrar la salida en el menor tiempo posible.
+
+2. Objetivos
+Objetivo Principal:
+Escapar del laberinto en menos de 3 minutos (tiempo máximo de simulación)
+
+Objetivos Específicos:
+Navegación básica: Implementar seguimiento de pared confiable
+Detección de callejones: Identificar cuando el robot entra en un callejón sin salida
+Toma de decisiones: Implementar lógica para elegir dirección en intersecciones
+Memoria simple: Recordar caminos ya explorados para evitar bucles
+Optimización: Minimizar tiempo y distancia recorrida hasta la salida
+
+Métricas de éxito:
+Tiempo de escape: < 180 segundos
+Colisiones: 0 colisiones con paredes
+Eficiencia: No recorrer el mismo camino más de 2 veces
+Completitud: Funcionar en 3 laberintos diferentes
+
+3. Descripción Técnica
+Componentes utilizados:
+Robot Pioneer P3DX con 16 sensores ultrasónicos
+
+Sensores principales:
+ultrasonicSensor[0]: Frontal izquierdo
+ultrasonicSensor[1]: Frontal derecho
+ultrasonicSensor[5]: Lateral izquierdo
+ultrasonicSensor[3]: Lateral derecho
+Controlador: Python con biblioteca ZMQ Remote API
+Algoritmo: Máquina de Estados Finitos (FSM) 
+
