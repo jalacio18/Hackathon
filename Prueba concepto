@@ -1,35 +1,46 @@
 Prueba de Concepto: Robot Escapista de Laberintos
 1. Introducción
-Nuestro proyecto consiste en desarrollar un robot autónomo capaz de escapar de un laberinto utilizando únicamente sensores ultrasónicos y una máquina de estados finitos (FSM). El robot Pioneer P3DX deberá navegar por un laberinto desconocido, evitando colisiones y encontrando la salida mediante algoritmos de exploración inteligente.
-
-El sistema implementará una combinación de seguimiento de pared izquierda mejorado con detección de callejones sin salida y toma de decisiones para maximizar la probabilidad de encontrar la salida en el menor tiempo posible.
+Nuestro proyecto consiste en el desarrollo de un robot autónomo capaz de escapar de un laberinto desconocido utilizando exclusivamente sensores ultrasónicos y una máquina de estados finitos (FSM) para la toma de decisiones.
+El robot Pioneer P3DX navega por el entorno sin conocimiento previo del mapa, evitando colisiones y resolviendo intersecciones mediante una estrategia reactiva basada en el seguimiento de la pared izquierda, complementada con la detección de obstáculos frontales y laterales.
+La solución se implementa en el entorno de simulación CoppeliaSim, utilizando Python y la ZMQ Remote API para el control del robot.
 
 2. Objetivos
-Objetivo Principal:
-Escapar del laberinto en menos de 3 minutos (tiempo máximo de simulación)
+Objetivo principal
+Conseguir que el robot resuelva el laberinto encontrando el cilindro.
 
-Objetivos Específicos:
-Navegación básica: Implementar seguimiento de pared confiable
-Detección de callejones: Identificar cuando el robot entra en un callejón sin salida
-Toma de decisiones: Implementar lógica para elegir dirección en intersecciones
-Memoria simple: Recordar caminos ya explorados para evitar bucles
-Optimización: Minimizar tiempo y distancia recorrida hasta la salida
+Objetivos específicos
+Navegación básica: Implementar un seguimiento de pared izquierda estable y continuo.
+Evitación de obstáculos: Detectar paredes frontales y laterales mediante sensores ultrasónicos.
+Gestión de intersecciones: Tomar decisiones correctas cuando existen múltiples caminos posibles.
+Detección de callejones sin salida: Identificar situaciones con obstáculos a ambos lados y al frente.
+Control de maniobras: Ejecutar giros precisos a izquierda, derecha y giros de 180° mediante temporización.
 
-Métricas de éxito:
-Tiempo de escape: < 180 segundos
-Colisiones: 0 colisiones con paredes
-Eficiencia: No recorrer el mismo camino más de 2 veces
-Completitud: Funcionar en 3 laberintos diferentes
+Métricas de éxito
+Tiempo de escape: < 180 segundos.
+Colisiones: 0 colisiones con las paredes del laberinto.
+Estabilidad: Movimiento fluido sin oscilaciones ni bucles infinitos.
+Generalidad: Funcionamiento correcto en distintos laberintos sin modificar el algoritmo.
 
 3. Descripción Técnica
-Componentes utilizados:
-Robot Pioneer P3DX con 16 sensores ultrasónicos
+Componentes utilizados
+Robot: Pioneer P3DX.
+Sensores: Sensores ultrasónicos integrados.
+Entorno de simulación: CoppeliaSim.
+Controlador: Python mediante ZMQ Remote API.
 
-Sensores principales:
-ultrasonicSensor[0]: Frontal izquierdo
-ultrasonicSensor[1]: Frontal derecho
-ultrasonicSensor[5]: Lateral izquierdo
-ultrasonicSensor[3]: Lateral derecho
-Controlador: Python con biblioteca ZMQ Remote API
-Algoritmo: Máquina de Estados Finitos (FSM) 
+Sensores principales
+Para la navegación se emplean los siguientes sensores ultrasónicos:
+ultrasonicSensor[3]: Sensor frontal, utilizado para detectar obstáculos delante del robot.
+ultrasonicSensor[5]: Sensor lateral izquierdo, utilizado para el seguimiento de la pared.
+ultrasonicSensor[2]: Sensor lateral derecho, utilizado para detectar bloqueos y decidir maniobras.
+
+
+Algoritmo de navegación
+
+El comportamiento del robot se modela mediante una máquina de estados finitos (FSM) con los siguientes estados:
+AVANZAR_RECTO:El robot avanza manteniendo una distancia objetivo respecto a la pared izquierda mediante una corrección proporcional de las velocidades de las ruedas.
+GIRAR_IZQUIERDA:Se ejecuta cuando existe un obstáculo frontal y la estrategia de seguimiento indica preferencia por la izquierda.
+GIRAR_DERECHA:Se activa cuando el robot encuentra un obstáculo frontal y la pared izquierda impide continuar.
+GIRAR_180:Se utiliza cuando el robot detecta un callejón sin salida, es decir, obstáculos a ambos lados y al frente.
+Las transiciones entre estados se basan en umbrales de distancia y en temporizaciones que garantizan giros consistentes y reproducibles.
 

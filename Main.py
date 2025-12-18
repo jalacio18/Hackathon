@@ -47,6 +47,7 @@ def main():
 
         t = sim.getSimulationTime()
 
+
         # AVANZAR RECTO
        
         if estado == AVANZAR_RECTO:
