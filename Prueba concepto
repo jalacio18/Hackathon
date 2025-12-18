@@ -6,7 +6,7 @@ La solución se implementa en el entorno de simulación CoppeliaSim, utilizando 
 
 2. Objetivos
 Objetivo principal
-Conseguir que el robot escape del laberinto en un tiempo máximo de 180 segundos, correspondiente a la duración total de la simulación.
+Conseguir que el robot resuelva el laberinto encontrando el cilindro.
 
 Objetivos específicos
 Navegación básica: Implementar un seguimiento de pared izquierda estable y continuo.
