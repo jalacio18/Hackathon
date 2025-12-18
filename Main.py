@@ -10,7 +10,7 @@ GIRAR_180_GRADOS  = 4
 VELOCIDAD_AVANCE = 2.0
 VELOCIDAD_GIRO   = 2.2
 
-# UMBRALES DE DISTANCIA (m)
+# Distancias (m)
 DISTANCIA_PARED    = 0.30
 DISTANCIA_PELIGRO  = 0.15
 DISTANCIA_OBJETIVO = 0.45
@@ -105,5 +105,6 @@ while sim.getSimulationTime() < 180:
              estado_actual = AVANZAR_RECTO
 
         sim.step()
+
 
 
