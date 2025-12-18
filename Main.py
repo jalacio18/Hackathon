@@ -60,7 +60,7 @@ def main():
 
             if dist_f < DISTANCIA_PARED:
 
-                # 🔑 PARAR ANTES DE DECIDIR
+                # PARAR ANTES DE DECIDIR
                 sim.setJointTargetVelocity(motor_i, 0)
                 sim.setJointTargetVelocity(motor_d, 0)
                 sim.step()
